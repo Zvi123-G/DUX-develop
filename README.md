@@ -16,7 +16,7 @@
 1. ודא ש-Node.js מותקן במחשב שלך.
 2. פתח את הטרמינל ונווט לתיקיית צד הלקוח:
     ```bash
-    cd /c:/Users/Magshimim/Desktop/Magshimim/DUX/DUX-develop/frontend/tours-website
+    cd /c:/Users/<you-user>/DUX-develop/frontend/tours-website
     ```
 3. התקן את התלויות באמצעות הפקודה:
     ```bash
