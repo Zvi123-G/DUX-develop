@@ -151,6 +151,7 @@ function App() {
               value={searchData.language}
               onChange={handleSearchChange}>
               <option> Search by language </option>
+              <option value="all">All</option>
               <option value="Hebrew">Hebrew</option>
               <option value="Arabic">Arabic</option>
               <option value="Russian">Russian</option>

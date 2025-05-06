@@ -23,7 +23,10 @@ class Server:
         if language is None:
             return jsonify({"error": "language is required"}), 400
         # show the tours in the database by language
-        tours = self.db_handler.get_tour_by_language(language)
+        if language == 'all':
+            tours = self.db_handler.get_tours()
+        else:
+            tours = self.db_handler.get_tour_by_language(language)
         return jsonify(tours, 200)
 
     def submit(self):
