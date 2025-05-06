@@ -8,6 +8,8 @@ function App() {
     language: ''
   });
 
+  const [searchData, setSearchData] = useState({});
+
   const [jsonData, setData] = useState(null);
 
   const fetchData = () => {
@@ -28,6 +30,13 @@ function App() {
   const handleChange = (e) => {
     setFormData({
       ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchData({
+      ...searchData,
       [e.target.name]: e.target.value
     });
   };
@@ -58,6 +67,23 @@ function App() {
       pic_url: '',
       language: ''
     });
+  };
+
+  
+  const handleSearchSubmit = (e) => {
+    console.log('searchData:', searchData.language);
+    e.preventDefault();
+    fetch(`/api/tours/${searchData.language}`, {
+      method: 'POST',
+    })
+      .then(response => response.json())
+      .then(data => {
+        setData(data);
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   };
 
   const boxStyle = {
@@ -118,7 +144,33 @@ function App() {
         backgroundColor: '#3feff0',
         padding: '20px'
       }}>
-        <h1 style={{ textAlign: 'center' }} >DUX Travel</h1>
+        <h1 style={{ textAlign: 'center' }} >DUX Travel</h1> <br/>
+        <form onSubmit={handleSearchSubmit}>
+           <select
+              name="language"
+              value={searchData.language}
+              onChange={handleSearchChange}>
+              <option> Search by language </option>
+              <option value="Hebrew">Hebrew</option>
+              <option value="Arabic">Arabic</option>
+              <option value="Russian">Russian</option>
+              <option value="English">English</option>
+              <option value="French">French</option>
+              <option value="Amharic">Amharic</option>
+              <option value="Yiddish">Yiddish</option>
+              <option value="Spanish">Spanish</option>
+              <option value="Portuguese">Portuguese</option>
+              <option value="Persian">Persian (Farsi)</option>
+              <option value="German">German</option>
+              <option value="Hindi">Hindi</option>
+              <option value="Chinese">Chinese (Mandarin)</option>
+              <option value="Japanese">Japanese</option>
+              <option value="Korean">Korean</option>
+              <option value="Turkish">Turkish</option>
+              <option value="Italian">Italian</option>
+            </select>
+          <button style={{ margin: "5px" }} type="submit">Search</button>
+        </form>
         <h2 style={{ textAlign: 'left', marginLeft: '30px' }}>Tours</h2>
         <br />
         <div className="Tours boxes" style={{

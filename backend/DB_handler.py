@@ -48,6 +48,15 @@ class DBHandler:
         self.cursor.execute('DELETE FROM tours WHERE id = ?', (tour_id,))
         self.conn.commit()
     
+    def get_tour_by_language(self, language):
+        self.cursor.execute('select * from tours where language = ?', (language,))
+        rows = self.cursor.fetchall()
+        tours = [
+            {"id": row[0], "tour_name": row[1], "pic_url": row[2], "language": row[3]}
+            for row in rows
+        ]
+        return tours
+    
     def close(self):
         self.conn.close()
     
